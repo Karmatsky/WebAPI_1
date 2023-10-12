@@ -172,12 +172,19 @@ Connection: close
 
 Разрешается выбрать любой другой веб-сайт вместо https://wikipedia.org
 
+![alt text](https://raw.githubusercontent.com/Karmatsky/WebAPI_1/main/screenshots1/1.1.png)
+![alt text](https://raw.githubusercontent.com/Karmatsky/WebAPI_1/main/screenshots1/1.2.png)
+![alt text](https://raw.githubusercontent.com/Karmatsky/WebAPI_1/main/screenshots1/1.3.png)
+![alt text](https://raw.githubusercontent.com/Karmatsky/WebAPI_1/main/screenshots1/1.4.png)
+
 ## Задание 2
 
 1. Создать ключ шифрования для работы по зашифрованному каналу связи
 ```
 $ openssl req -new -x509 -keyout key.pem -out server.pem -days 365 -nodes
 ```
+![alt text](https://raw.githubusercontent.com/Karmatsky/WebAPI_1/main/screenshots1/2.1.png)
+
 2. Поднять веб сервер работающий по протоколу HTTPS
 ```python
 import ssl
@@ -193,7 +200,11 @@ httpd.socket = ssl.wrap_socket(
 )
 httpd.serve_forever()
 ```
+![alt text](https://raw.githubusercontent.com/Karmatsky/WebAPI_1/main/screenshots1/2.2.png)
 3. Отправить запрос на локальный сервер
 ```
 $ openssl s_client -connect 127.0.0.1:4443
 ```
+![alt text](https://raw.githubusercontent.com/Karmatsky/WebAPI_1/main/screenshots1/2.3.png)
+![alt text](https://raw.githubusercontent.com/Karmatsky/WebAPI_1/main/screenshots1/2.4.png)
+![alt text](https://raw.githubusercontent.com/Karmatsky/WebAPI_1/main/screenshots1/2.5.png)
