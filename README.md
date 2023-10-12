@@ -143,3 +143,40 @@ HTTP-ответ, содержащий данные, возвращается о�
 ```
 $ openssl s_client -connect wikipedia.org:443
 ```
+```
+GET /wiki/страница HTTP/1.1
+Host: ru.wikipedia.org
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; ru; rv:1.9b5) Gecko/2008050509 Firefox/3.0b5
+Accept: text/html
+Connection: close
+(пустая строка)
+```
+Проанализировать ответ сервера. Описать работу HTTP протокола в данном случае.
+
+Разрешается выбрать любой другой веб-сайт вместо https://wikipedia.org
+
+## Задание 2
+
+1. Создать ключ шифрования для работы по зашифрованному каналу связи
+```
+$ openssl req -new -x509 -keyout key.pem -out server.pem -days 365 -nodes
+```
+2. Поднять веб сервер работающий по протоколу HTTPS
+```python
+import ssl
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+
+httpd = HTTPServer(("0.0.0.0", 4443), SimpleHTTPRequestHandler)
+httpd.socket = ssl.wrap_socket(
+    httpd.socket,
+    certfile="server.pem",
+    keyfile="key.pem",
+    server_side=True,
+    ssl_version=ssl.PROTOCOL_TLS,
+)
+httpd.serve_forever()
+```
+3. Отправить запрос на локальный сервер
+```
+$ openssl s_client -connect 127.0.0.1:4443
+```
